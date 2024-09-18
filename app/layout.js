@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${lora.className} h-screen`}
+        className={`${lora.className}`}
       >
         {children}
       </body>

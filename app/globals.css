@@ -32,14 +32,13 @@ body {
   backdrop-filter: blur(10px); 
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-10px);
 }
 
 @layer components{
   .main-background{
     @apply bg-gradient-to-r from-black via-black to-[#553769]
   }
-  .glassmorphism{
+  .glassmorphism-01{
     @apply bg-white/30 backdrop-blur-lg border-b-2 border-white/50
   }
   .primary-background{
