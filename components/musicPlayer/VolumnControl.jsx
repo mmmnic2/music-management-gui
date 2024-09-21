@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
 const VolumeControl = ({ volume, onVolumeChange, onMute, isMute }) => {
-  console.log(isMute);
   return (
     <div className="flex items-center">
       <div

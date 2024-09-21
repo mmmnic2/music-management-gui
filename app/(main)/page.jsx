@@ -1,47 +1,15 @@
 import { Banner } from "@/components/Banner";
 import { Searchbar } from "@/components/common/navbar/Searchbar";
-import { MusicPlayer } from "@/components/musicPlayer/MusicPlayer";
-import SongList from "@/components/SongList";
-
-const songs = [
-  {
-    id: 1,
-    title: "song1",
-    artist: "artist1",
-  },
-  {
-    id: 4,
-    title: "song1",
-    artist: "artist1",
-  },
-  {
-    id: 3,
-    title: "song1",
-    artist: "artist1",
-  },
-  {
-    id: 2,
-    title: "song1",
-    artist: "artist1",
-  },
-  {
-    id: 5,
-    title: "song1",
-    artist: "artist1",
-  },
-];
+import MusicProvider from "@/components/MusicProvider";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="flex-grow">
+    <div className="min-h-screen relative">
+      <div className="">
         <Banner />
         <Searchbar />
-        <SongList />
       </div>
-      <div>
-        <MusicPlayer />
-      </div>
+      <MusicProvider />
     </div>
   );
 }

@@ -1,64 +1,96 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MusicPlayerActions } from "./MusicPlayerActions";
 import ProgressBar from "./ProgressBar";
 import VolumeControl from "./VolumnControl";
 import { MusicPlayerInfo } from "./MusicPlayerInfo";
+import { useMusicPlayer } from "@/context/MusicPlayerContext";
+import { Howl } from "howler";
 
 export const MusicPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { currentSong, isPlaying, setIsPlaying } = useMusicPlayer();
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(240);
-  const [volume, setVolume] = useState(20);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(10);
   const [isMute, setIsMute] = useState(false);
+  const soundRef = useRef(null);
+  const [currentSongUrl, setCurrentSongUrl] = useState(null);
 
   useEffect(() => {
     let interval = null;
-
     if (isPlaying) {
       interval = setInterval(() => {
-        setCurrentTime((prevTime) => {
-          if (prevTime < duration) {
-            return prevTime + 1;
-          } else {
-            setIsPlaying(false);
-            return prevTime;
-          }
-        });
+        if (soundRef.current) {
+          setCurrentTime(soundRef.current.seek());
+        }
       }, 1000);
     } else if (!isPlaying && interval) {
       clearInterval(interval);
     }
 
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isPlaying, duration]);
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (soundRef.current) {
+      if (isPlaying) {
+        soundRef.current.play();
+      } else {
+        soundRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (currentSong) {
+      if (!soundRef.current || currentSongUrl !== currentSong) {
+        if (soundRef.current) {
+          soundRef.current.unload();
+        }
+
+        soundRef.current = new Howl({
+          src: [currentSong],
+          volume: volume / 100,
+          onload: () => {
+            setDuration(soundRef.current.duration());
+          },
+          onend: () => {
+            setIsPlaying(false);
+            setCurrentTime(0);
+          },
+        });
+
+        soundRef.current.play();
+        setIsPlaying(true);
+        setCurrentSongUrl(currentSong);
+      }
+    }
+  }, [currentSong]);
 
   const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
+    setIsPlaying((prev) => !prev);
   };
 
   const handleTimeChange = (value) => {
-    setCurrentTime(value);
+    if (soundRef.current) {
+      soundRef.current.seek(value);
+      setCurrentTime(value);
+    }
   };
 
   const handleVolumeChange = (value) => {
     setVolume(value);
-
-    console.log("Volume:", value);
+    if (soundRef.current) {
+      soundRef.current.volume(value / 100);
+    }
   };
 
   const handleMute = () => {
     setIsMute(!isMute);
-  };
-
-  useEffect(() => {
-    if (volume === 0) {
-      setIsMute(true);
+    if (soundRef.current) {
+      soundRef.current.mute(!isMute);
     }
-    setIsMute(false);
-  }, [volume]);
+  };
 
   return (
     <div className="flex items-center gap-3 glassmorphism">

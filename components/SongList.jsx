@@ -13,7 +13,7 @@ const SongList = () => {
   const fetchSongs = async (page) => {
     try {
       const response = await axios.get(
-        `/api/v1/songs?page=${page}&size=${songsPerPage}`
+        `${process.env.NEXT_PUBLIC_URL}/api/v1/songs?page=${page}&size=${songsPerPage}`
       );
       setSongs(response.data.songs);
     } catch (error) {
@@ -45,7 +45,7 @@ const SongList = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {(songs > 0 &&
           songs.map((song) => <SongCard key={idx} data={song} />)) || (
-          <SongCard data={{}} />
+          <SongCard data={'/assets/audio/See_tinh.mp3'} />
         )}
       </div>
 

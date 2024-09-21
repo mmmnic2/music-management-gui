@@ -8,15 +8,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import React, { useState } from "react";
 import defaultImage from "@/public/assets/images/music_card_image.jpg";
+import { useMusicPlayer } from "@/context/MusicPlayerContext";
 
 export const SongCard = ({ data }) => {
   const [id, setId] = useState(0);
+  const { setCurrentSong, setIsPlaying, isPlaying } = useMusicPlayer();
+
   const handleSongClick = () => {
     if (id === data.id) {
-      setId(0);
+      setIsPlaying(prev => !prev);
+    } else {
+      setId(data.id);
+      setCurrentSong(data);
+      setIsPlaying(true);
     }
-    setId(data.id);
   };
+
   return (
     <div
       className="basis-1/4 px-1 mb-2 group cursor-pointer"
@@ -34,11 +41,9 @@ export const SongCard = ({ data }) => {
             />
           </div>
           <div className="opacity-0 group-hover:opacity-100 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 text-white text-4xl">
-            {
-              <FontAwesomeIcon
-                icon={(id === data.id && faCirclePause) || faCirclePlay}
-              />
-            }
+            <FontAwesomeIcon
+              icon={id === data.id && isPlaying ? faCirclePause : faCirclePlay}
+            />
           </div>
         </div>
         <div className="mt-4">
