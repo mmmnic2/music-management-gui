@@ -1,7 +1,7 @@
 import { Banner } from "@/components/Banner";
 import { Searchbar } from "@/components/common/navbar/Searchbar";
-import { MusicCard } from "@/components/musicCard/MusicCard";
 import { MusicPlayer } from "@/components/musicPlayer/MusicPlayer";
+import SongList from "@/components/SongList";
 
 const songs = [
   {
@@ -37,11 +37,7 @@ export default function Home() {
       <div className="flex-grow">
         <Banner />
         <Searchbar />
-        <div id="song_list" className="flex flex-wrap">
-          {songs.map((song, idx) => (
-            <MusicCard key={idx} data={song} />
-          ))}
-        </div>
+        <SongList />
       </div>
       <div>
         <MusicPlayer />
