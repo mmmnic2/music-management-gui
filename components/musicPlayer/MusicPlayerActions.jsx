@@ -15,7 +15,7 @@ export const MusicPlayerActions = ({
   onPrevious,
 }) => {
   return (
-    <div className="flex text-white gap-2">
+    <div className="flex text-gray-500 gap-2 pl-2">
       <MusicPlayerAction onClick={onPrevious}>
         {faBackwardStep}
       </MusicPlayerAction>

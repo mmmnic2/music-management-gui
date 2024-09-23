@@ -1,20 +1,42 @@
-import Button from "@/components/button/Button";
+import {
+  faBarsStaggered,
+  faBookmark,
+  faHeart,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Tooltip from "../Tooltip";
+
+const navIcons = [
+  {
+    name: "Home",
+    icon: faHouse,
+  },
+  {
+    name: "My Library",
+    icon: faBookmark,
+  },
+  {
+    name: "Favorite",
+    icon: faHeart,
+  },
+  {
+    name: "Current Playlist",
+    icon: faBarsStaggered,
+  },
+];
 
 export const NavBar = () => {
   return (
-    <section className="fixed w-full z-50">
-      <main className="container mx-auto flex justify-between py-2 px-4">
-        <div className="text-2xl font-bold">Lan Music</div>
-        <div>
-          <Button className={"primary-background text-white mr-2"}>
-            Login
-          </Button>
-          <Button className={"bg-secondary-gradient text-white"}>
-            Register
-          </Button>
-        </div>
-      </main>
-    </section>
+    <nav className="glassmorphism flex flex-col items-center gap-4 py-4 px-2">
+      {navIcons.map((nav) => (
+        <Tooltip key={nav.name} content={nav.name}>
+          <button className="text-white">
+            <FontAwesomeIcon icon={nav.icon} />
+          </button>
+        </Tooltip>
+      ))}
+    </nav>
   );
 };

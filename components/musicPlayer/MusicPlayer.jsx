@@ -9,6 +9,7 @@ import { Howl } from "howler";
 
 export const MusicPlayer = () => {
   const { currentSong, isPlaying, setIsPlaying } = useMusicPlayer();
+  console.log(currentSong, isPlaying);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(10);
@@ -93,7 +94,7 @@ export const MusicPlayer = () => {
   };
 
   return (
-    <div className="flex items-center gap-3 glassmorphism">
+    <div className="flex items-center gap-3 glassmorphism mt-4">
       <div className="flex items-center gap-3 justify-between basis-3/4">
         <MusicPlayerActions
           isPlaying={isPlaying}

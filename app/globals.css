@@ -14,7 +14,7 @@
   }
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -27,22 +27,29 @@ body {
 }
 
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.2); 
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  backdrop-filter: blur(10px); 
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@layer components{
-  .main-background{
+@layer components {
+  .main-background {
     @apply bg-gradient-to-r from-black via-black to-[#553769]
   }
-  .glassmorphism-01{
-    @apply bg-white/30 backdrop-blur-lg border-b-2 border-white/50
+
+  .glassmorphism-01 {
+    @apply bg-black/30 backdrop-blur-md border-b-2 border-white/50
   }
-  .primary-background{
+
+  .primary-background {
     @apply bg-gradient-to-r from-primary via-primary to-secondary
+  }
+
+  .active-background {
+    @apply bg-gradient-to-r;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
   }
 }
 

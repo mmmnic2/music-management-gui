@@ -1,12 +1,11 @@
 import { faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 
 const VolumeControl = ({ volume, onVolumeChange, onMute, isMute }) => {
   return (
     <div className="flex items-center">
       <div
-        className="text-white cursor-pointer "
+        className="text-gray-500 cursor-pointer "
         onClick={onMute}
       >
         <FontAwesomeIcon icon={(isMute && faVolumeXmark) || faVolumeHigh} />
