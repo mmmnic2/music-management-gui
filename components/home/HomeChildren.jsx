@@ -8,7 +8,7 @@ import SongList from "../SongList";
 export const HomeChildren = () => {
   return (
     <div className="glassmorphism px-4">
-      <div className="py-6">Main Nav bar</div>
+      <div className="py-6">Home</div>
       <div className="grid grid-cols-2 grid-rows-4 gap-10">
         <div className="row-span-4">
           <SongCardV3 song={{ title: "Chill Mix", subtitle: "21 Tracks" }} />
